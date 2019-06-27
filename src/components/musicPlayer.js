@@ -3,7 +3,7 @@ import PlayerBar from './playerBar'
 import album from '../data/albumData'
 
 class musicPlayer extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             album: album,
@@ -19,10 +19,10 @@ class musicPlayer extends Component {
     componentDidMount() {
         this.eventListeners = {
             timeupdate: e => {
-                this.setState({currentTime: this.audioElement.currentTime});
+                this.setState({ currentTime: this.audioElement.currentTime });
             },
             durationchange: e => {
-                this.setState({duration: this.audioElement.duration});
+                this.setState({ duration: this.audioElement.duration });
             },
         };
         this.audioElement.addEventListener('timeupdate', this.eventListeners.timeupdate);
@@ -37,17 +37,17 @@ class musicPlayer extends Component {
 
     play() {
         this.audioElement.play();
-        this.setState({isPlaying: true})
+        this.setState({ isPlaying: true })
     }
 
     pause() {
         this.audioElement.pause();
-        this.setState({isPlaying: false})
+        this.setState({ isPlaying: false })
     }
 
     setSong(song) {
         this.audioElement.src = song.audioSrc;
-        this.setState({currentSong: song})
+        this.setState({ currentSong: song })
     }
 
     handleSongClick(song) {
@@ -63,12 +63,12 @@ class musicPlayer extends Component {
     }
 
     handleAutoPlay(e) {
-      if (e.target.value === 1) {
-          this.handleNextClick()
-      }
+        if (e.target.value === 1) {
+            this.handleNextClick()
+        }
     }
 
-   
+
     handlePrevClick() {
         const currentIndex = this.state.album.songs.findIndex(song => this.state.currentSong === song);
         const newIndex = Math.max(0, currentIndex - 1);
@@ -105,8 +105,8 @@ class musicPlayer extends Component {
 
     render() {
         return (
-            <div class="music-player">
-                <div class="album-art">
+            <div className="music-player">
+                <div className="album-art">
                     <img src={this.state.album.albumCover} />
                 </div>
                 <PlayerBar
@@ -121,7 +121,7 @@ class musicPlayer extends Component {
                     handlePrevClick={() => this.handlePrevClick()}
                     handleNextClick={() => this.handleNextClick()}
                     handleTimeChange={(e) => this.handleTimeChange(e)}
-                 />
+                />
             </div>
         )
     }
